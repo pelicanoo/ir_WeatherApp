@@ -19,7 +19,7 @@ The track wetness text blinks red when track wetness is going up, and blinks gre
 
 # Install
 
-## 1. Download the latest .zip source code from the releases page.
+## 1. Download the latest .zip source code from the [releases page](https://github.com/pelicanoo/ir_WeatherApp/releases).
 
 ## 2. Create the Custom Apps folder
 

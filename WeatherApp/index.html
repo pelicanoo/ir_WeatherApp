@@ -1,22 +1,18 @@
 <!doctype html>
 <html
     style="--font-family-sans-serif: Roboto;
-    --font-family-monospace: Roboto Mono;
     --theme-bg-color: hsla(0, 0%, 6%, 0.7);
     --theme-text-color: hsla(0, 0%, 100%);
     --theme-prec-up: hsla(140, 80%, 50%);
     --theme-prec-down: hsla(10, 80%, 60%);
     --border-radius: 6px; 
-    --app-font-size: 17vmin;
-    --app-icon-font-size: 10vmin;
-    --theme-margin: 2vmin;"
+    --font-size: 3vmin;"
     >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8" />
     <meta name="author" content="Rovlgut" />
     <title>Weather App</title>
-    <base href="/WeatherApp/">
     <!-- angular -->
     <script src="./libs/angular/angular.min.js"></script>
     <!-- coffee -->
@@ -30,58 +26,67 @@
     <div app-is-maximized id="app">
         <div ng-controller="WeatherCtrl" class="app">
             <div class="wrap">
-                <div ng-if="showTrackWetness" class="cell">
-                    <div class="header">Track Wetness</div>
-                    <div class="value">
-                        <div ng-bind="ir.CustomTrackWetnessStr"></div>
-                    </div>
+                <div class="cell">
+                    <div class="header">Track wetness: </div>
+                    <div class="value track-wetness" ng-class="{'blink-red': ir.CustomTrackWetnessState == 1, 'blink-green': ir.CustomTrackWetnessState == 2}" ng-bind="ir.CustomTrackWetnessStr"></div>
                 </div>
                 
-                <div ng-if="showPrecipitation" class="cell">
-                    <div class="header">Precipitation</div>
+                <div class="cell">
+                    <div class="header">Precipitation: </div>
                     <div class="value div-inline">
-                        <div ng-if="ir.Skies == 0 && ir.Precipitation<0.000001">
-                            <span class="weather-icon-sun"></span>
-                        </div>
-                        <div ng-if="ir.Skies == 1 && ir.Precipitation<0.000001">
-                            <span class="weather-icon-partially-cloudy"></span>
-                        </div>
-                        <div ng-if="ir.Skies == 2 && ir.Precipitation<0.000001">
-                            <span class="weather-icon-mostly-cloudy"></span>
-                        </div>
-                        <div ng-if="ir.Skies == 3 && ir.Precipitation<0.001">
-                            <span class="weather-icon-overcast"></span>
-                        </div>
-                        <div ng-if="ir.Precipitation>0.001 && ir.Precipitation<0.1">
-                            <span class="weather-icon-light-rain"></span>
-                        </div>
-                        <div ng-if="ir.Precipitation>0.1 && ir.Precipitation<0.5">
-                            <span class="weather-icon-moderate-rain"></span>
-                        </div>
-                        <div ng-if="ir.Precipitation>0.5">
-                            <span class="weather-icon-heavy-rain"></span>
-                        </div>
                         <div ng-bind="ir.CustomPrecipitationStr" class="ml"></div>
                         <div ng-if="ir.CustomPrecipitationState == 1">
-                            <span class="weather-icon-arrow-up icon prec-up"></span>
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(38, 191, 74)" d="M342.6 73.4C330.1 60.9 309.8 60.9 297.3 73.4L137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7C149.8 291.2 170.1 291.2 182.6 278.7L288 173.3L288 544C288 561.7 302.3 576 320 576C337.7 576 352 561.7 352 544L352 173.3L457.4 278.7C469.9 291.2 490.2 291.2 502.7 278.7C515.2 266.2 515.2 245.9 502.7 233.4L342.7 73.4z"/></svg>
                         </div>
                         <div ng-if="ir.CustomPrecipitationState == 2">
-                            <span class="weather-icon-arrow-down icon prec-down"></span>
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(209, 25, 25)" d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z"/></svg>
                         </div>
                     </div>
                 </div>
 
-                <div ng-if="showAirPressure" class="cell">
-                    <div class="header">Air Pressure</div>
-                    <div class="value">
-                        <div ng-bind="ir.CustomAirPressureStr"></div>
+                <div class="cell">
+                    <div class="header">Humidity: </div>
+                    <div class="value div-inline">
+                        <div ng-bind="ir.CustomHumidityStr" class="ml"></div>
+                        <div ng-if="ir.CustomHumidityState == 1">
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(38, 191, 74)" d="M342.6 73.4C330.1 60.9 309.8 60.9 297.3 73.4L137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7C149.8 291.2 170.1 291.2 182.6 278.7L288 173.3L288 544C288 561.7 302.3 576 320 576C337.7 576 352 561.7 352 544L352 173.3L457.4 278.7C469.9 291.2 490.2 291.2 502.7 278.7C515.2 266.2 515.2 245.9 502.7 233.4L342.7 73.4z"/></svg>
+                        </div>
+                        <div ng-if="ir.CustomHumidityState == 2">
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(209, 25, 25)" d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z"/></svg>
+                        </div>
                     </div>
                 </div>
-                
-                <div ng-if="showAirDensity" class="cell">
-                    <div class="header">Air Density</div>
-                    <div class="value">
-                        <div ng-bind="ir.CustomAirDensityStr"></div>
+
+                <div class="cell">
+                    <div class="header">Track state: </div>
+                    <div class="value div-inline">
+                        <div ng-bind="ir.CustomTrackStateStr" class="ml" ng-class="{'blink-red': ir.CustomTrackStateState == 1, 'blink-green': ir.CustomTrackStateState == 2}"></div>
+                    </div>
+                </div>
+
+                <div class="cell">
+                    <div class="header">Track temp: </div>
+                    <div class="value div-inline">
+                        <div ng-bind="ir.CustomTrackTempStr" class="ml"></div>
+                        <div ng-if="ir.CustomTrackTempState == 1">
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(38, 191, 74)" d="M342.6 73.4C330.1 60.9 309.8 60.9 297.3 73.4L137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7C149.8 291.2 170.1 291.2 182.6 278.7L288 173.3L288 544C288 561.7 302.3 576 320 576C337.7 576 352 561.7 352 544L352 173.3L457.4 278.7C469.9 291.2 490.2 291.2 502.7 278.7C515.2 266.2 515.2 245.9 502.7 233.4L342.7 73.4z"/></svg>
+                        </div>
+                        <div ng-if="ir.CustomTrackTempState == 2">
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(209, 25, 25)" d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cell">
+                    <div class="header">Air temp: </div>
+                    <div class="value div-inline">
+                        <div ng-bind="ir.CustomAirTempStr" class="ml"></div>
+                        <div ng-if="ir.CustomAirTempState == 1">
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(38, 191, 74)" d="M342.6 73.4C330.1 60.9 309.8 60.9 297.3 73.4L137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7C149.8 291.2 170.1 291.2 182.6 278.7L288 173.3L288 544C288 561.7 302.3 576 320 576C337.7 576 352 561.7 352 544L352 173.3L457.4 278.7C469.9 291.2 490.2 291.2 502.7 278.7C515.2 266.2 515.2 245.9 502.7 233.4L342.7 73.4z"/></svg>
+                        </div>
+                        <div ng-if="ir.CustomAirTempState == 2">
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="rgb(209, 25, 25)" d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z"/></svg>
+                        </div>
                     </div>
                 </div>
             </div>

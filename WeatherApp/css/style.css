@@ -1,7 +1,7 @@
 #app,
 body,
 html {
-    height: auto;
+    height: 100%;
 }
 
 .app,
@@ -78,10 +78,6 @@ body {
 #app {
     border-radius: var(--border-radius, none);
     background-color: var(--theme-bg-color);
-    display: inline-block;
-    padding: 0.2em;
-    width: auto;
-    height: auto;
 }
 
 .header {
@@ -89,16 +85,17 @@ body {
 }
 
 .app {
-    position: relative;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    font-size: var(--font-size);
+    font-size: calc(2.5 * (1vw + 1vh));
     font-family: var(--font-family-sans-serif, Roboto);
-    padding: 0.1em 0.2em;
-    width: auto;
-    height: auto;
     line-height: 1;
 }
 body>#app>.app {
@@ -106,20 +103,21 @@ body>#app>.app {
 }
 .app>.wrap {
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 0.6em;
-    align-items: baseline;
-    width: auto;
-    height: auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
 }
 
 .app>.wrap>.cell {
     display: flex;
     flex-flow: row;
-    align-items: baseline;
-    gap: 0;
-    padding-right: 0.6em;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
     border-right: 1px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    height: 100%;
 }
 
 .app>.wrap>.cell:nth-child(3n) {
@@ -176,8 +174,8 @@ body>#app>.app {
 }
 
 .arrow-icon {
-    width: var(--font-size);
-    height: var(--font-size);
+    width: 1em;
+    height: 1em;
     display: inline-block;
     vertical-align: middle;
 }

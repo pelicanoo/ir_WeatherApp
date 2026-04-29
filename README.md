@@ -1,3 +1,5 @@
+# If you like this widget, I'd appreciate a donation of iRacing credits. My iRacing Id: 813344
+
 ![preview](img/img.png)
 
 # Forked from https://github.com/Rovlgut/ir_WeatherApp. Thanks to Rovlgut for the original work.
@@ -56,6 +58,11 @@ Inside the `WeatherApp` folder you should see:
     -   Go to **App tab → Settings**
     -   Click **Add App Folder**
     -   Select your CustomApps folder
+  
+### If the **Add App Folder** option is missing, you can manually do it:
+1. **Go to `C:\Users\%USERPROFILE%\AppData\Roaming\Kapps\iRacingBrowserApps`**
+2. **Create a folder called `apps`**
+3. **Paste the `WeatherApp` folder inside `apps`**
 
 ------------------------------------------------------------------------
 
